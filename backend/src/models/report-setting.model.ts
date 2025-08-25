@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
 export enum ReportFrequencyEnum {
-  DAILY = "DAILY",
-  WEEKLY = "WEEKLY",
   MONTHLY = "MONTHLY",
-  QUARTERLY = "QUARTERLY",
-  YEARLY = "YEARLY",
 }
 
 export interface ReportSettingDocument extends Document {
@@ -13,12 +9,12 @@ export interface ReportSettingDocument extends Document {
   frequency: keyof typeof ReportFrequencyEnum;
   isEnabled: boolean;
   nextReportDate?: Date;
-  lastSentDate: Date;
+  lastSentDate?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export const reportSettingSchema = new mongoose.Schema<ReportSettingDocument>(
+const reportSettingSchema = new mongoose.Schema<ReportSettingDocument>(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -32,14 +28,13 @@ export const reportSettingSchema = new mongoose.Schema<ReportSettingDocument>(
     },
     isEnabled: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     nextReportDate: {
       type: Date,
     },
     lastSentDate: {
       type: Date,
-      required: true,
     },
   },
   {
