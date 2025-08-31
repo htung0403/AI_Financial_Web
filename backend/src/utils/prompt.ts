@@ -44,7 +44,7 @@ export const reportInsightPrompt = ({
   totalExpenses: number;
   availableBalance: number;
   savingsRate: number;
-  categories: Record<string, { amount: number; percentage: number }>;
+  categories: Record<string, { amount: string; percentage: number }>;
   periodLabel: string;
 }) => {
   const categoryList = Object.entries(categories)
