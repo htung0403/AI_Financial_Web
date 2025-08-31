@@ -5,7 +5,6 @@ import TransactionModel, {
 } from "../models/transaction.model";
 import { getDateRange } from "../utils/date";
 import { differenceInDays, subDays, subYears } from "date-fns";
-import { formatCurrency } from "../utils/format-currency";
 
 export const summaryAnalyticsService = async (
   userId: string,
@@ -219,9 +218,9 @@ export const summaryAnalyticsService = async (
   }
 
   return {
-    availableBalance: formatCurrency(availableBalance),
-    totalIncome: formatCurrency(totalIncome),
-    totalExpenses: formatCurrency(totalExpenses),
+    availableBalance: availableBalance,
+    totalIncome: totalIncome,
+    totalExpenses: totalExpenses,
     savingRate: {
       percentage: parseFloat(savingData.savingsPercentage.toFixed(2)),
       expenseRatio: parseFloat(savingData.expenseRatio.toFixed(2)),
@@ -230,15 +229,9 @@ export const summaryAnalyticsService = async (
     percentageChange: {
       ...percentageChange,
       previousValues: {
-        incomeAmount: formatCurrency(
-          percentageChange.previousValues.incomeAmount
-        ),
-        expenseAmount: formatCurrency(
-          percentageChange.previousValues.expenseAmount
-        ),
-        balanceAmount: formatCurrency(
-          percentageChange.previousValues.balanceAmount
-        ),
+        incomeAmount: percentageChange.previousValues.incomeAmount,
+        expenseAmount: percentageChange.previousValues.expenseAmount,
+        balanceAmount: percentageChange.previousValues.balanceAmount,
       },
     },
     preset: {
@@ -351,8 +344,8 @@ export const chartAnalyticsService = async (
 
   const transaformedData = (resultData?.chartData || []).map((item: any) => ({
     date: item.date,
-    income: formatCurrency(item.income),
-    expenses: formatCurrency(item.expenses),
+    income: item.income,
+    expenses: item.expenses,
   }));
 
   return {
@@ -476,10 +469,10 @@ export const expensePieChartBreakdownService = async (
     breakdown: [],
   };
   const transformedData = {
-    totalSpent: formatCurrency(data.totalSpent),
+    totalSpent: data.totalSpent,
     breakdown: data.breakdown.map((item: any) => ({
       ...item,
-      value: formatCurrency(item.value),
+      value: item.value,
     })),
   };
 

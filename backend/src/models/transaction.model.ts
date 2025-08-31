@@ -68,7 +68,7 @@ const transactionSchema = new Schema<TransactionDocument>(
     },
     description: {
       type: String,
-      required: true,
+      required: false,
     },
     category: {
       type: String,
