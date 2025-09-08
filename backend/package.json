@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --files src/index.ts",
-    "build": "tsc && cp ./package.json ./dist",
-    "start": "node dist/index.js"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "postbuild": "cp -r src/mailers/templates dist/mailers/ || true"
   },
   "keywords": [],
   "author": "",
